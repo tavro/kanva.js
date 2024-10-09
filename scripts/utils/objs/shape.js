@@ -1,7 +1,6 @@
 function Shape(position, points) {
     Node.call(this, position);
     this.points = points || [];
-    // this.color = color || '#000000';
 }
 
 Shape.prototype = Object.create(Node.prototype);

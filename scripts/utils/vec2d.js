@@ -27,9 +27,3 @@ Vector2D.prototype.normalized = function() {
     const magnitude = this.magnitude();
     return this.scale(1 / magnitude);
 };
-
-Vector2D.prototype.randomVelocity = function() {
-    const angle = Math.random() * 2 * Math.PI;
-    const speed = Math.random() * 50 + 50;
-    return new Vector2D(Math.cos(angle) * speed, Math.sin(angle) * speed);
-}

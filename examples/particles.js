@@ -6,7 +6,7 @@ canvas.height = window.innerHeight;
 
 const particleSystem = new ParticleSystem(
     canvas,
-    new Vector2D(canvas.width / 2, canvas.height / 2),
+    new Vector2D(canvas.width / 4, canvas.height / 4), // TODO: Oh, this makes sence!
     2.0,
     20,
     new Vector2D(0, 0),
@@ -17,7 +17,7 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    particleSystem.position = new Vector2D(canvas.width / 2, canvas.height / 2);
+    particleSystem.position = new Vector2D(canvas.width / 4, canvas.height / 4);
 });
 
 let lastTime = 0;

@@ -15,7 +15,9 @@ ParticleSystem.prototype.constructor = ParticleSystem;
 
 ParticleSystem.prototype.emitParticle = function() {
     // TODO: Update this to use the particles actual velocity
-    const particle = new Particle(this.position, new Vector2D().randomVelocity(), this.particleLifetime, this.shapePoints);
+    const randomVelocity = getRandomVelocity();
+    const particle = new Particle(this.position, new Vector2D(randomVelocity.x, randomVelocity.y), this.particleLifetime, this.shapePoints);
+    particle.randomizeShape();
     this.addChild(particle);
     this.particles.push(particle);
 };
@@ -44,11 +46,18 @@ ParticleSystem.prototype.update = function(deltaTime) {
 
 ParticleSystem.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
+
     for (let particle of this.particles) {
         this.ctx.fillStyle = particle.color;
         this.ctx.beginPath();
-        this.ctx.arc(particle.position.x, particle.position.y, 5, 0, 2 * Math.PI);
+        
+        const points = particle.getGlobalPoints();
+
+        this.ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            this.ctx.lineTo(points[i].x, points[i].y);
+        }
+        this.ctx.closePath();
         this.ctx.fill();
     }
 };

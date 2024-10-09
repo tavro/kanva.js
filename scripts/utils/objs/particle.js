@@ -18,3 +18,11 @@ Particle.prototype.update = function(deltaTime) {
 Particle.prototype.isDead = function() {
     return this.age >= this.lifetime;
 };
+
+Particle.prototype.randomizeShape = function() {
+    this.points = [];
+    const randomPoints = generateRandomPoints();
+    for (let i = randomPoints.length - 1; i >= 0; i--) {
+        this.points.push(new Vector2D(randomPoints[i].x, randomPoints[i].y));
+    }
+};
