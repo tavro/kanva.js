@@ -46,7 +46,7 @@ ParticleSystem.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
     for (let particle of this.particles) {
-        this.ctx.fillStyle = 'blue';
+        this.ctx.fillStyle = particle.color;
         this.ctx.beginPath();
         this.ctx.arc(particle.position.x, particle.position.y, 5, 0, 2 * Math.PI);
         this.ctx.fill();

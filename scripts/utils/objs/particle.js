@@ -1,8 +1,9 @@
-function Particle(position, velocity, lifetime, points) {
+function Particle(position, velocity, lifetime, points, color) {
     Shape.call(this, position, points);
     this.velocity = velocity || new Vector2D(0, 0);
     this.lifetime = lifetime || 1.0; // in seconds
     this.age = 0;
+    this.color = color || getRandomHexColor();
 }
 
 Particle.prototype = Object.create(Shape.prototype);
