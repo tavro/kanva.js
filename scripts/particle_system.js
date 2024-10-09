@@ -1,5 +1,7 @@
-function ParticleSystem(position, particleLifetime, emitRate, particleVelocity, shapePoints) {
+function ParticleSystem(canvas, position, particleLifetime, emitRate, particleVelocity, shapePoints) {
     Node.call(this, position);
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
     this.particles = [];
     this.particleLifetime = particleLifetime || 2.0;
     this.emitRate = emitRate || 10;
@@ -12,7 +14,7 @@ ParticleSystem.prototype = Object.create(Node.prototype);
 ParticleSystem.prototype.constructor = ParticleSystem;
 
 ParticleSystem.prototype.emitParticle = function() {
-    // const velocity = this.particleVelocity;
+    // TODO: Update this to use the particles actual velocity
     const particle = new Particle(this.position, new Vector2D().randomVelocity(), this.particleLifetime, this.shapePoints);
     this.addChild(particle);
     this.particles.push(particle);
@@ -38,4 +40,15 @@ ParticleSystem.prototype.update = function(deltaTime) {
     }
     
     Node.prototype.update.call(this, deltaTime);
+};
+
+ParticleSystem.prototype.draw = function() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    for (let particle of this.particles) {
+        this.ctx.fillStyle = 'blue';
+        this.ctx.beginPath();
+        this.ctx.arc(particle.position.x, particle.position.y, 5, 0, 2 * Math.PI);
+        this.ctx.fill();
+    }
 };
