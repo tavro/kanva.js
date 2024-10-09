@@ -12,8 +12,8 @@ ParticleSystem.prototype = Object.create(Node.prototype);
 ParticleSystem.prototype.constructor = ParticleSystem;
 
 ParticleSystem.prototype.emitParticle = function() {
-    const velocity = this.particleVelocity;
-    const particle = new Particle(this.position, velocity, this.particleLifetime, this.shapePoints);
+    // const velocity = this.particleVelocity;
+    const particle = new Particle(this.position, new Vector2D().randomVelocity(), this.particleLifetime, this.shapePoints);
     this.addChild(particle);
     this.particles.push(particle);
 };
